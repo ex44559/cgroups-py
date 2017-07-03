@@ -57,14 +57,3 @@ def get_blkio_cgroup_weight(policy):
         print("policy %s does not exist" % policy)
         return -1
 
-if __name__ == '__main__':
-    blk_group = list_blkio_cgroup()
-    for g in blk_group:
-        print(g)
-
-    add_blkio_cgroup("test")
-    set_blkio_cgroup_weight("test", 100)
-
-    weight = get_blkio_cgroup_weight("test")
-    print("weight is %d" % int(weight))
-    del_blkio_cgroup("test")
