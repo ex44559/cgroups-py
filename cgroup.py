@@ -7,10 +7,13 @@ CGROUP_BLK_BASE_PATH = '/sys/fs/cgroup/blkio'
 
 def list_blkio_cgroup():
     path = CGROUP_BLK_BASE_PATH
-    blk_groups = [d for d in os.listdir(path) if os.path.isdir(d)]
+
+    blk_groups = [d for d in os.listdir(path) if os.path.isdir(os.path.join(path, d))]
 
     if not blk_groups:
         print("no blk groups")
+
+    return blk_groups
 
 
 def add_blkio_cgroup(policy):
@@ -55,7 +58,10 @@ def get_blkio_cgroup_weight(policy):
         return -1
 
 if __name__ == '__main__':
-    list_blkio_cgroup()
+    blk_group = list_blkio_cgroup()
+    for g in blk_group:
+        print(g)
+
     add_blkio_cgroup("test")
     set_blkio_cgroup_weight("test", 100)
 
