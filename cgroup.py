@@ -52,7 +52,7 @@ def get_blkio_cgroup_weight(policy):
         with open(path, 'r') as f:
             weight = f.read()
             print("weight read")
-            return weight
+            return int(weight)
     else:
         print("policy %s does not exist" % policy)
         return -1
